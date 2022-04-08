@@ -39,20 +39,20 @@
             <th width="280px">Action</th>
         </tr>
 
-        @foreach ($mahasiswa as $Mahasiswa)
+        @foreach ($paginate as $mhs)
         <tr>
-            <td>{{ $Mahasiswa->nim }}</td>
-            <td>{{ $Mahasiswa->nama }}</td>
-            <td>{{ $Mahasiswa->tanggal_lahir }}</td>
-            <td>{{ $Mahasiswa->kelas }}</td>
-            <td>{{ $Mahasiswa->jurusan }}</td>
-            <td>{{ $Mahasiswa->no_handphone }}</td>
-            <td>{{ $Mahasiswa->email }}</td>
+            <td>{{ $mhs->nim }}</td>
+            <td>{{ $mhs->nama }}</td>
+            <td>{{ $mhs->tanggal_lahir }}</td>
+            <td>{{ $mhs->kelas->nama_kelas }}</td>
+            <td>{{ $mhs->jurusan }}</td>
+            <td>{{ $mhs->no_handphone }}</td>
+            <td>{{ $mhs->email }}</td>
             <td>
-                <form action="{{ route('mahasiswa.destroy',$Mahasiswa->nim) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('mahasiswa.show',$Mahasiswa->nim) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$Mahasiswa->nim) }}">Edit</a>
-                    
+                <form action="{{ route('mahasiswa.destroy',$mhs->nim) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$mhs->nim) }}">Edit</a>
+
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -63,14 +63,14 @@
     </table>
     <div>
         <p>Showing
-        {{$mahasiswa->firstItem()}}
+        {{$paginate->firstItem()}}
         to
-        {{$mahasiswa->lastItem()}}
+        {{$paginate->lastItem()}}
         of
-        {{$mahasiswa->total()}}
+        {{$paginate->total()}}
         entries</p>
      </div>
-    <div class="d-flex justify-content-center">
-        {{$mahasiswa->links()}}
+    <div class="float-right my-2">
+        {{$paginate->links()}}
     </div>
 @endsection
