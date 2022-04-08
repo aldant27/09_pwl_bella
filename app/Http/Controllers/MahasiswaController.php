@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\MataKuliah;
+use App\Models\Mahasiswa_MataKuliah;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -168,17 +170,14 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Penambahan function baru 'cari'
+     * Penambahan function baru 'nilai'
      *
      */
     /*
-    public function cari(Request $request)
-	{
-        $keyword = $request->cari;
-        $mahasiswa = Mahasiswa::where('nama', 'like', "%" . $keyword . "%");
-        return view('mahasiswa.cari', compact('mahasiswa'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
     */
+    public function nilai($nim){
+        $nilai = Mahasiswa::with('kelas', 'matakuliah')->find($nim);
+        return view('mahasiswa.nilai',compact('nilai'));
+    }
 
 }
