@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::get('cari',[MahasiswaController::class, 'search']);
+Route::get('mahasiswa/nilai/{nim}',[MahasiswaController::class, 'nilai'])
+    ->name('mahasiswa.nilai');
 
 Route::get('/', function () {
     return view('welcome');
